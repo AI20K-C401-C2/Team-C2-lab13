@@ -7,6 +7,7 @@ import ErrorRateChart from './components/ErrorRateChart';
 import CostChart from './components/CostChart';
 import TokensChart from './components/TokensChart';
 import QualityScoreChart from './components/QualityScoreChart';
+import ErrorLogPanel from './components/ErrorLogPanel';
 
 function App() {
   const { data, loading, error, lastUpdated } = useMetrics();
@@ -29,13 +30,17 @@ function App() {
           <>
             <StatCards data={data} />
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-6">
               <LatencyChart data={data} />
               <TrafficChart data={data} />
               <ErrorRateChart data={data} />
               <CostChart data={data} />
               <TokensChart data={data} />
               <QualityScoreChart data={data} />
+            </div>
+
+            <div className="grid grid-cols-1 gap-6">
+              <ErrorLogPanel logs={data.errorLogs} />
             </div>
           </>
         )}

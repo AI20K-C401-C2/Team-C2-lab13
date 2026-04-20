@@ -3,13 +3,14 @@ from __future__ import annotations
 import os
 
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from structlog.contextvars import bind_contextvars
 
 from .agent import LabAgent
 from .incidents import disable, enable, status
 from .logging_config import configure_logging, get_logger
-from .metrics import record_error, snapshot
+from .metrics import record_error, snapshot, error_snapshot
 from .middleware import CorrelationIdMiddleware
 from .pii import hash_user_id, summarize_text
 from .schemas import ChatRequest, ChatResponse
@@ -40,6 +41,11 @@ async def health() -> dict:
 @app.get("/metrics")
 async def metrics() -> dict:
     return snapshot()
+
+
+@app.get("/errors")
+async def errors() -> list[dict]:
+    return error_snapshot()
 
 
 @app.post("/chat", response_model=ChatResponse)
@@ -85,14 +91,43 @@ async def chat(request: Request, body: ChatRequest) -> ChatResponse:
         )
     except Exception as exc:  # pragma: no cover
         error_type = type(exc).__name__
-        record_error(error_type)
+        cid = request.state.correlation_id
+        record_error(
+            error_type=error_type,
+            correlation_id=cid,
+            detail=str(exc),
+            user_id_hash=hash_user_id(body.user_id),
+        )
         log.error(
             "request_failed",
             service="api",
             error_type=error_type,
             payload={"detail": str(exc), "message_preview": summarize_text(body.message)},
         )
-        raise HTTPException(status_code=500, detail=error_type) from exc
+        return JSONResponse(
+            status_code=500,
+            content={"error_type": error_type, "detail": str(exc)},
+        )
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    cid = getattr(request.state, 'correlation_id', 'unknown')
+    record_error(
+        error_type="ValidationError",
+        correlation_id=cid,
+        detail=str(exc.errors()),
+    )
+    log.error(
+        "request_failed",
+        service="api",
+        error_type="ValidationError",
+        payload={"detail": str(exc)},
+    )
+    return JSONResponse(
+        status_code=422,
+        content={"detail": exc.errors()},
+    )
 
 
 @app.post("/incidents/{name}/enable")
