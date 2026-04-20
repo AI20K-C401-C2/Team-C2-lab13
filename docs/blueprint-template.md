@@ -34,9 +34,10 @@
 - [SLO_TABLE]:
 | SLI | Target | Window | Current Value |
 |---|---:|---|---:|
-| Latency P95 | < 3000ms | 28d | |
-| Error Rate | < 2% | 28d | |
-| Cost Budget | < $2.5/day | 1d | |
+| Latency P95 | < 3000ms | 28d | 150ms |
+| Error Rate | < 2% | 28d | 0% |
+| Cost Budget | < $2.5/day | 1d | $0.0213 (current run total) |
+| Quality Avg | > 0.75 | 28d | 0.88 |
 
 ### 3.3 Alerts & Runbook
 - [ALERT_RULES_SCREENSHOT]: [Path to image]
