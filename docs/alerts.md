@@ -38,3 +38,16 @@
   - shorten prompts
   - route easy requests to cheaper model
   - apply prompt cache
+
+## 4. Low quality score
+- Severity: P2
+- Trigger: `quality_score_avg < 0.75 for 30m`
+- Impact: answer quality drifts below acceptable user experience
+- First checks:
+  1. Inspect recent traces with low quality metadata and compare input/output pairs
+  2. Check whether retrieval returned empty or low-relevance context (`doc_count` in trace metadata)
+  3. Verify if any prompt, model, or feature routing change was deployed recently
+- Mitigation:
+  - tighten prompt instructions and enforce answer format constraints
+  - add fallback retrieval strategy when doc relevance is low
+  - route impacted feature to a higher-quality model temporarily
