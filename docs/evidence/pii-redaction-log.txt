@@ -1,0 +1,5 @@
+Sample log lines showing PII redaction:
+
+{"service": "api", "payload": {"message_preview": "What is your refund policy? My email is [REDACTED_EMAIL]"}, "event": "request_received", "env": "dev", "session_id": "s01", "correlation_id": "req-65c27de5", "user_id_hash": "2055254ee30a", "model": "claude-sonnet-4-5", "feature": "qa", "level": "info", "ts": "2026-04-20T08:48:24.362015Z"}
+{"service": "api", "payload": {"message_preview": "Here is my phone [REDACTED_PHONE_VN], what should be logged?"}, "event": "request_received", "env": "dev", "session_id": "s05", "correlation_id": "req-63339ae4", "user_id_hash": "64f6ec689229", "model": "claude-sonnet-4-5", "feature": "qa", "level": "info", "ts": "2026-04-20T08:48:24.980863Z"}
+{"service": "api", "payload": {"message_preview": "What is the policy for PII and credit card [REDACTED_CREDIT_CARD]?"}, "event": "request_received", "env": "dev", "session_id": "s09", "correlation_id": "req-0ae182e5", "user_id_hash": "4d14d5d4f719", "model": "claude-sonnet-4-5", "feature": "qa", "level": "info", "ts": "2026-04-20T08:48:25.597925Z"}

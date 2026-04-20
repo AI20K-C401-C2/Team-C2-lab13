@@ -1,11 +1,22 @@
-# 📋 Lab 13 — Phân Công Công Việc (6 Thành Viên)
+# 📋 Lab 13 — Phân Công Công Việc (7 Thành Viên / 6 Nhóm)
 
 > **Trạng thái**: `[ ]` Chưa làm · `[/]` Đang làm · `[x]` Hoàn thành
 > **Mục tiêu**: Validate Score ≥ 80/100 · ≥ 10 Langfuse traces · Dashboard 6 panels
 
 ---
 
-## 👤 Member A — Logging & PII
+## 👥 Danh Sách Thành Viên
+
+- Member A: **Bùi Minh Ngọc**
+- Member B: **Phạm Việt Anh**
+- Member C: **Nguyễn Thùy Linh**
+- Member D: **Phạm Đình Trường**
+- Member E: **Phạm Việt Hoàng**
+- Member F: **Lê Đức Thanh** và **Phan Tuấn Minh** (2 người)
+
+---
+
+## 👤 Member A (Bùi Minh Ngọc) — Logging & PII
 
 **Trọng tâm**: Structured logging, PII scrubbing, bảo vệ dữ liệu nhạy cảm
 
@@ -32,7 +43,7 @@
 
 ---
 
-## 👤 Member B — Tracing & Enrichment
+## 👤 Member B (Phạm Việt Anh) — Tracing & Enrichment
 
 **Trọng tâm**: Correlation ID, log enrichment, Langfuse tracing
 
@@ -67,7 +78,7 @@
 
 ---
 
-## 👤 Member C — SLO & Alerts
+## 👤 Member C (Nguyễn Thùy Linh) — SLO & Alerts
 
 **Trọng tâm**: Định nghĩa SLO, alert rules, runbook
 
@@ -100,7 +111,7 @@
 
 ---
 
-## 👤 Member D — Load Test & Incident Injection
+## 👤 Member D (Phạm Đình Trường) — Load Test & Incident Injection
 
 **Trọng tâm**: Tạo traffic, inject incidents, thu thập dữ liệu cho dashboard
 
@@ -123,7 +134,7 @@
   - Gửi requests → ghi nhận cost/tokens tăng
   - Ghi lại total_cost_usd, tokens trước/sau
   - Tắt: `python scripts/inject_incident.py --scenario cost_spike --disable`
-- [ ] Thu thập dữ liệu metrics qua nhiều lần test → giao cho Member E làm dashboard
+- [ ] Thu thập dữ liệu metrics qua nhiều lần test → giao cho Member E (Phạm Việt Hoàng) làm dashboard
 - [ ] Chụp screenshot Langfuse trace list (≥ 10 traces) + trace waterfall
 
 **Deliverables**:
@@ -134,7 +145,7 @@
 
 ---
 
-## 👤 Member E — Dashboard & Evidence
+## 👤 Member E (Phạm Việt Hoàng) — Dashboard & Evidence
 
 **Trọng tâm**: Xây dashboard 6 panels, thu thập evidence, chụp screenshots
 
@@ -153,12 +164,12 @@
   - Tối đa 6-8 panels
 - [ ] Chụp screenshot dashboard đầy đủ 6 panels
 - [ ] Thu thập tất cả screenshots cho `docs/grading-evidence.md`:
-  - [ ] Langfuse trace list ≥ 10 traces (từ Member D)
-  - [ ] Trace waterfall chi tiết (từ Member D)
-  - [ ] JSON logs có correlation_id (từ Member B)
-  - [ ] Log với PII redaction (từ Member A)
+  - [ ] Langfuse trace list ≥ 10 traces (từ Member D - Phạm Đình Trường)
+  - [ ] Trace waterfall chi tiết (từ Member D - Phạm Đình Trường)
+  - [ ] JSON logs có correlation_id (từ Member B - Phạm Việt Anh)
+  - [ ] Log với PII redaction (từ Member A - Bùi Minh Ngọc)
   - [ ] Dashboard 6 panels (tự làm)
-  - [ ] Alert rules với runbook link (từ Member C)
+  - [ ] Alert rules với runbook link (từ Member C - Nguyễn Thùy Linh)
 - [ ] Lưu tất cả screenshots vào `docs/screenshots/` hoặc tương tự
 
 **Deliverables**:
@@ -168,31 +179,31 @@
 
 ---
 
-## 👤 Member F — Blueprint Report & Demo Lead
+## 👤 Member F (Lê Đức Thanh & Phan Tuấn Minh) — Blueprint Report & Demo Lead
 
 **Trọng tâm**: Viết báo cáo, chuẩn bị demo, tổng hợp kết quả nhóm
 
-- [ ] Điền `docs/blueprint-template.md`:
-  - [ ] **Section 1 — Team Metadata**: Tên nhóm, repo URL, danh sách thành viên + vai trò
-  - [ ] **Section 2 — Group Performance**: 
-    - Chạy `python scripts/validate_logs.py` → ghi điểm
-    - Đếm traces trên Langfuse → ghi số
-    - Confirm PII leaks = 0
-  - [ ] **Section 3 — Technical Evidence**:
-    - 3.1 Logging & Tracing: điền screenshots correlation ID, PII redaction, trace waterfall + giải thích
-    - 3.2 Dashboard & SLOs: điền screenshot dashboard, bảng SLO (lấy từ Member C)
+- [x] Điền `docs/blueprint-template.md`:
+  - [x] **Section 1 — Team Metadata**: Tên nhóm, repo URL, danh sách thành viên + vai trò
+  - [x] **Section 2 — Group Performance**:
+    - Ghi điểm validate từ `docs/screenshots/validate_logs.jpg` → `100/100`
+    - Đếm traces từ `docs/screenshots/trace_list.jpg` → `41`
+    - Confirm PII leaks = `0`
+  - [x] **Section 3 — Technical Evidence**:
+    - 3.1 Logging & Tracing: điền evidence correlation ID, PII redaction, trace summary/waterfall path + giải thích
+    - 3.2 Dashboard & SLOs: điền screenshot dashboard, bảng SLO (lấy từ Member C - Nguyễn Thùy Linh và metrics snapshot)
     - 3.3 Alerts & Runbook: điền screenshot alerts, link runbook
-  - [ ] **Section 4 — Incident Response**: 
-    - Chọn 1 scenario (rag_slow recommended)
+  - [x] **Section 4 — Incident Response**:
+    - Chọn scenario `tool_fail`
     - Ghi symptoms, root cause, fix, preventive measure
-  - [ ] **Section 5 — Individual Contributions**: Thu thập từ mỗi member
+  - [x] **Section 5 — Individual Contributions**: Thu thập từ mỗi member
     - Mỗi người ghi tasks completed + link commit/PR
-  - [ ] **Section 6 — Bonus Items** (nếu có)
-- [ ] Chuẩn bị demo script:
-  - Thứ tự demo: Health check → Gửi request → Show logs → Show Langfuse → Show dashboard → Inject incident → Debug flow
-  - Phân công ai demo phần nào
-  - Chuẩn bị trả lời câu hỏi giảng viên (xem `docs/mock-debug-qa.md` nếu có)
-- [ ] Review lần cuối: chạy `validate_logs.py` → confirm ≥ 80/100
+  - [x] **Section 6 — Bonus Items** (nếu có)
+- [x] Chuẩn bị demo script:
+  - Đã tạo `docs/demo-script.md`
+  - Có thứ tự demo: Health check → Gửi request → Show logs → Show Langfuse → Show dashboard → Inject incident → Debug flow
+  - Có phân công ai demo phần nào + câu hỏi giảng viên trọng tâm
+- [x] Review lần cuối: đối chiếu `docs/screenshots/validate_logs.jpg` → confirm `100/100`
 - [ ] Commit & push tất cả changes lên Git
 
 **Deliverables**:
@@ -207,25 +218,25 @@
 ```
 Giờ 1 (Setup & Core TODOs):
 ├── ALL: Setup env, pip install, copy .env
-├── Member B: Fix middleware.py (TODO 1) + main.py (TODO 2)  ← ƯU TIÊN CAO
-├── Member A: Fix logging_config.py (TODO 3) + pii.py (TODO 4)  ← ƯU TIÊN CAO
-└── Member B: Cấu hình Langfuse keys
+├── Member B (Phạm Việt Anh): Fix middleware.py (TODO 1) + main.py (TODO 2)  ← ƯU TIÊN CAO
+├── Member A (Bùi Minh Ngọc): Fix logging_config.py (TODO 3) + pii.py (TODO 4)  ← ƯU TIÊN CAO
+└── Member B (Phạm Việt Anh): Cấu hình Langfuse keys
 
 Giờ 2 (Validate & Data Collection):
-├── Member D: Chạy load_test.py, verify traces, inject incidents
-├── Member A: Chạy validate_logs.py, fix nếu chưa đạt 100
-├── Member C: Cập nhật SLO + alert rules + runbook
-└── Member B: Verify Langfuse traces, chụp screenshots
+├── Member D (Phạm Đình Trường): Chạy load_test.py, verify traces, inject incidents
+├── Member A (Bùi Minh Ngọc): Chạy validate_logs.py, fix nếu chưa đạt 100
+├── Member C (Nguyễn Thùy Linh): Cập nhật SLO + alert rules + runbook
+└── Member B (Phạm Việt Anh): Verify Langfuse traces, chụp screenshots
 
 Giờ 3 (Dashboard & Report):
-├── Member E: Xây dashboard 6 panels
-├── Member D: Thu thập thêm data, inject thêm incidents
-├── Member C: Hoàn thiện bảng SLO với current values
-└── Member F: Bắt đầu viết blueprint report
+├── Member E (Phạm Việt Hoàng): Xây dashboard 6 panels
+├── Member D (Phạm Đình Trường): Thu thập thêm data, inject thêm incidents
+├── Member C (Nguyễn Thùy Linh): Hoàn thiện bảng SLO với current values
+└── Member F (Lê Đức Thanh & Phan Tuấn Minh): Bắt đầu viết blueprint report
 
 Giờ 4 (Polish & Demo):
-├── Member E: Thu thập tất cả screenshots
-├── Member F: Hoàn thiện report, chuẩn bị demo
+├── Member E (Phạm Việt Hoàng): Thu thập tất cả screenshots
+├── Member F (Lê Đức Thanh & Phan Tuấn Minh): Hoàn thiện report, chuẩn bị demo
 ├── ALL: Review, commit, push
 └── ALL: Rehearse demo
 ```
@@ -236,21 +247,21 @@ Giờ 4 (Polish & Demo):
 
 ```mermaid
 flowchart TD
-    B["Member B<br/>Middleware + Enrichment"] --> A["Member A<br/>PII Scrubbing"]
+    B["Member B<br/>Phạm Việt Anh<br/>Middleware + Enrichment"] --> A["Member A<br/>Bùi Minh Ngọc<br/>PII Scrubbing"]
     A --> V["validate_logs.py<br/>Score ≥ 80"]
     B --> V
-    B --> D["Member D<br/>Load Test + Incidents"]
-    D --> E["Member E<br/>Dashboard + Evidence"]
-    C["Member C<br/>SLO + Alerts"] --> E
+    B --> D["Member D<br/>Phạm Đình Trường<br/>Load Test + Incidents"]
+    D --> E["Member E<br/>Phạm Việt Hoàng<br/>Dashboard + Evidence"]
+    C["Member C<br/>Nguyễn Thùy Linh<br/>SLO + Alerts"] --> E
     A --> E
-    D --> F["Member F<br/>Report + Demo"]
+    D --> F["Member F<br/>Lê Đức Thanh & Phan Tuấn Minh<br/>Report + Demo"]
     E --> F
     C --> F
 ```
 
 > [!IMPORTANT]
-> **Member B phải hoàn thành TODO 1 & 2 trước** vì tất cả members khác phụ thuộc vào correlation ID và log enrichment hoạt động đúng.
+> **Member B (Phạm Việt Anh) phải hoàn thành TODO 1 & 2 trước** vì tất cả members khác phụ thuộc vào correlation ID và log enrichment hoạt động đúng.
 > 
-> **Member A nên hoàn thành song song** với Member B vì PII scrubbing độc lập.
+> **Member A (Bùi Minh Ngọc) nên hoàn thành song song** với Member B vì PII scrubbing độc lập.
 > 
-> **Member D bắt đầu ngay khi B + A xong** để tạo data cho E và F.
+> **Member D (Phạm Đình Trường) bắt đầu ngay khi B + A xong** để tạo data cho E và F.
