@@ -1,0 +1,18 @@
+Recent traces confirmed through Langfuse evidence:
+
+2026-04-20 08:55:41.602000+00:00 | session=s10 | trace_id=2abda537-56b9-4852-b7f6-e4f93b39b5fb | user=105a9cef3903 | tags=claude-sonnet-4-5,lab,qa
+2026-04-20 08:55:41.444000+00:00 | session=s09 | trace_id=eb5e4752-8083-4ac5-8257-6853f6c6cd2c | user=4d14d5d4f719 | tags=claude-sonnet-4-5,lab,qa
+2026-04-20 08:55:41.286000+00:00 | session=s08 | trace_id=dabdfaf1-9278-4bad-853d-84117eaca054 | user=2f015d970c0b | tags=claude-sonnet-4-5,lab,qa
+2026-04-20 08:55:41.128000+00:00 | session=s07 | trace_id=095784f2-6c3a-42aa-b487-315ac0070611 | user=1632c29ecdec | tags=claude-sonnet-4-5,lab,qa
+2026-04-20 08:55:40.970000+00:00 | session=s06 | trace_id=be57d777-6e97-465f-a637-93699a1f1dd2 | user=4c4f62330d76 | tags=claude-sonnet-4-5,lab,summary
+2026-04-20 08:55:40.812000+00:00 | session=s05 | trace_id=f553b6ab-ef11-4c52-b882-8dcdbcd366a7 | user=64f6ec689229 | tags=claude-sonnet-4-5,lab,qa
+2026-04-20 08:55:40.654000+00:00 | session=s04 | trace_id=86e291e3-09c8-4a1e-9d0e-9bd0302607ff | user=75af07890985 | tags=claude-sonnet-4-5,lab,qa
+2026-04-20 08:55:40.494000+00:00 | session=s03 | trace_id=7a162e7a-b2f7-47d0-95bd-007a5548db3e | user=97ce842ec69d | tags=claude-sonnet-4-5,lab,summary
+2026-04-20 08:55:40.334000+00:00 | session=s02 | trace_id=01a60380-d236-4165-87b3-b6f258f300f0 | user=95b6504a8bd6 | tags=claude-sonnet-4-5,lab,qa
+2026-04-20 08:55:40.172000+00:00 | session=s01 | trace_id=f59a4740-f8a5-4526-91f6-de0c1ea30d98 | user=2055254ee30a | tags=claude-sonnet-4-5,lab,qa
+
+Summary:
+- at least 10 recent traces exist for sessions s01 to s10
+- the captured trace list screenshot shows 41 traces in the selected view
+- user IDs are hashed
+- tags include `lab`, feature tags, and `claude-sonnet-4-5`

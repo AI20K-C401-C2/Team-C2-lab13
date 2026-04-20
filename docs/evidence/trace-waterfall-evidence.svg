@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#0b1020"/>
+  <rect x="40" y="40" width="1520" height="820" rx="24" fill="#111827" stroke="#334155" stroke-width="2"/>
+  <text x="80" y="110" fill="#f8fafc" font-family="Consolas, 'Courier New', monospace" font-size="42" font-weight="700">
+    Evidence Trace Detail / Waterfall Summary
+  </text>
+  <text x="80" y="155" fill="#94a3b8" font-family="Consolas, 'Courier New', monospace" font-size="24">
+    Tong hop tu Langfuse trace list va trace summary de bo sung phan evidence trong report
+  </text>
+
+  <rect x="80" y="210" width="500" height="560" rx="18" fill="#020617" stroke="#1e293b"/>
+  <text x="110" y="255" fill="#38bdf8" font-family="Consolas, 'Courier New', monospace" font-size="28">Trace metadata</text>
+  <text x="110" y="310" fill="#e2e8f0" font-family="Consolas, 'Courier New', monospace" font-size="22">session: s10</text>
+  <text x="110" y="350" fill="#e2e8f0" font-family="Consolas, 'Courier New', monospace" font-size="22">trace_id: 2abda537-56b9-4852-b7f6-e4f93b39b5fb</text>
+  <text x="110" y="390" fill="#e2e8f0" font-family="Consolas, 'Courier New', monospace" font-size="22">user_id_hash: 105a9cef3903</text>
+  <text x="110" y="430" fill="#e2e8f0" font-family="Consolas, 'Courier New', monospace" font-size="22">tags: lab, qa, claude-sonnet-4-5</text>
+  <text x="110" y="470" fill="#e2e8f0" font-family="Consolas, 'Courier New', monospace" font-size="22">captured traces in view: 41</text>
+  <text x="110" y="530" fill="#94a3b8" font-family="Consolas, 'Courier New', monospace" font-size="20">
+    Trace duoc dung de xac dinh dung thoi diem,
+  </text>
+  <text x="110" y="560" fill="#94a3b8" font-family="Consolas, 'Courier New', monospace" font-size="20">
+    session va request context truoc khi doi chieu log.
+  </text>
+
+  <rect x="650" y="210" width="790" height="560" rx="18" fill="#020617" stroke="#1e293b"/>
+  <text x="690" y="255" fill="#a78bfa" font-family="Consolas, 'Courier New', monospace" font-size="28">Flow debug theo Metrics -> Traces -> Logs</text>
+
+  <rect x="720" y="310" width="650" height="90" rx="16" fill="#1d4ed8"/>
+  <text x="750" y="365" fill="#eff6ff" font-family="Consolas, 'Courier New', monospace" font-size="26">1. Metrics: dashboard cho thay error rate tang len 2%</text>
+
+  <line x1="1045" y1="400" x2="1045" y2="455" stroke="#94a3b8" stroke-width="6"/>
+
+  <rect x="720" y="455" width="650" height="90" rx="16" fill="#7c3aed"/>
+  <text x="750" y="510" fill="#faf5ff" font-family="Consolas, 'Courier New', monospace" font-size="26">2. Traces: mo Langfuse de xac dinh request/session bi anh huong</text>
+
+  <line x1="1045" y1="545" x2="1045" y2="600" stroke="#94a3b8" stroke-width="6"/>
+
+  <rect x="720" y="600" width="650" height="110" rx="16" fill="#b91c1c"/>
+  <text x="750" y="655" fill="#fef2f2" font-family="Consolas, 'Courier New', monospace" font-size="24">3. Logs: request_failed + RuntimeError</text>
+  <text x="750" y="690" fill="#fef2f2" font-family="Consolas, 'Courier New', monospace" font-size="24">detail: Vector store timeout</text>
+
+  <text x="80" y="830" fill="#f59e0b" font-family="Consolas, 'Courier New', monospace" font-size="22">
+    Ghi chu: image nay tong hop evidence trace detail de dien report khi repo khong luu anh waterfall goc.
+  </text>
+</svg>

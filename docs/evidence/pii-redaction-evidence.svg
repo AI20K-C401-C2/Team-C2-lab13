@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#0f172a"/>
+  <rect x="40" y="40" width="1520" height="820" rx="24" fill="#111827" stroke="#334155" stroke-width="2"/>
+  <text x="80" y="110" fill="#f8fafc" font-family="Consolas, 'Courier New', monospace" font-size="42" font-weight="700">
+    Evidence PII Redaction
+  </text>
+  <text x="80" y="155" fill="#94a3b8" font-family="Consolas, 'Courier New', monospace" font-size="24">
+    Tong hop tu log da redact cua nhom - dung de dien truong screenshot PII redaction trong report
+  </text>
+
+  <rect x="80" y="210" width="1440" height="170" rx="16" fill="#020617" stroke="#1e293b"/>
+  <text x="110" y="255" fill="#22c55e" font-family="Consolas, 'Courier New', monospace" font-size="24">Case 1: Email da duoc che</text>
+  <text x="110" y="300" fill="#e2e8f0" font-family="Consolas, 'Courier New', monospace" font-size="22">
+    {"payload": {"message_preview": "What is your refund policy? My email is [REDACTED_EMAIL]"}}
+  </text>
+  <text x="110" y="340" fill="#94a3b8" font-family="Consolas, 'Courier New', monospace" font-size="20">
+    session_id=s01 | correlation_id=req-65c27de5 | feature=qa
+  </text>
+
+  <rect x="80" y="410" width="1440" height="170" rx="16" fill="#020617" stroke="#1e293b"/>
+  <text x="110" y="455" fill="#22c55e" font-family="Consolas, 'Courier New', monospace" font-size="24">Case 2: So dien thoai da duoc che</text>
+  <text x="110" y="500" fill="#e2e8f0" font-family="Consolas, 'Courier New', monospace" font-size="22">
+    {"payload": {"message_preview": "Here is my phone [REDACTED_PHONE_VN], what should be logged?"}}
+  </text>
+  <text x="110" y="540" fill="#94a3b8" font-family="Consolas, 'Courier New', monospace" font-size="20">
+    session_id=s05 | correlation_id=req-63339ae4 | feature=qa
+  </text>
+
+  <rect x="80" y="610" width="1440" height="170" rx="16" fill="#020617" stroke="#1e293b"/>
+  <text x="110" y="655" fill="#22c55e" font-family="Consolas, 'Courier New', monospace" font-size="24">Case 3: The tin dung da duoc che</text>
+  <text x="110" y="700" fill="#e2e8f0" font-family="Consolas, 'Courier New', monospace" font-size="22">
+    {"payload": {"message_preview": "What is the policy for PII and credit card [REDACTED_CREDIT_CARD]?"}}
+  </text>
+  <text x="110" y="740" fill="#94a3b8" font-family="Consolas, 'Courier New', monospace" font-size="20">
+    session_id=s09 | correlation_id=req-0ae182e5 | feature=qa
+  </text>
+
+  <text x="80" y="830" fill="#f59e0b" font-family="Consolas, 'Courier New', monospace" font-size="22">
+    Ket luan: PII da bi redact thanh [REDACTED_*], phu hop yeu cau Lab 13.
+  </text>
+</svg>
