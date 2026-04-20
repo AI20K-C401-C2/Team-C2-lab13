@@ -27,6 +27,15 @@ class LabAgent:
 
     @observe()
     def run(self, user_id: str, feature: str, session_id: str, message: str) -> AgentResult:
+        # Trigger specific errors for testing
+        if message == "trigger_zero_division":
+            1 / 0
+        if message == "trigger_key_error":
+            data = {}
+            _ = data["nonexistent"]
+        if message == "trigger_type_error":
+            _ = "string" + 123
+
         started = time.perf_counter()
         docs = retrieve(message)
         prompt = f"Feature={feature}\nDocs={docs}\nQuestion={message}"

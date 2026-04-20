@@ -68,7 +68,7 @@ def main() -> None:
                     time.sleep(delay)
             
             # Random: doi khi gay loi (30% chance - cao hon de error breakdown nhay)
-            if random.random() < 0.3:
+            if random.random() < 0.02:
                 print("  -> Injecting error request...")
                 try:
                     # Gui request voi payload loi
@@ -77,7 +77,7 @@ def main() -> None:
                     pass  # Expected error
             
             # Random: doi khi gay timeout (20% chance)
-            if random.random() < 0.2:
+            if random.random() < 0.02:
                 print("  -> Injecting timeout request...")
                 try:
                     # Gui request voi message rat dai de gay delay
@@ -95,7 +95,7 @@ def main() -> None:
                     pass  # Expected timeout
             
             # Random: doi khi gay validation error (15% chance)
-            if random.random() < 0.15:
+            if random.random() < 0.02:
                 print("  -> Injecting validation error...")
                 try:
                     # Thieu required field

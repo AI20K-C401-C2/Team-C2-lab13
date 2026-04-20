@@ -8,8 +8,10 @@ REQUEST_COSTS: list[float] = []
 REQUEST_TOKENS_IN: list[int] = []
 REQUEST_TOKENS_OUT: list[int] = []
 ERRORS: Counter[str] = Counter()
+ERROR_DETAILS: list[dict] = []
 TRAFFIC: int = 0
 QUALITY_SCORES: list[float] = []
+MAX_ERROR_DETAILS = 50
 
 
 def record_request(latency_ms: int, cost_usd: float, tokens_in: int, tokens_out: int, quality_score: float) -> None:
@@ -23,8 +25,17 @@ def record_request(latency_ms: int, cost_usd: float, tokens_in: int, tokens_out:
 
 
 
-def record_error(error_type: str) -> None:
+def record_error(error_type: str, correlation_id: str = "", detail: str = "", user_id_hash: str = "") -> None:
     ERRORS[error_type] += 1
+    ERROR_DETAILS.append({
+        "error_type": error_type,
+        "correlation_id": correlation_id or "unknown",
+        "detail": detail or "No detail provided",
+        "user_id_hash": user_id_hash or "unknown",
+        "timestamp": __import__("time").time(),
+    })
+    if len(ERROR_DETAILS) > MAX_ERROR_DETAILS:
+        ERROR_DETAILS.pop(0)
 
 
 
@@ -50,3 +61,16 @@ def snapshot() -> dict:
         "error_breakdown": dict(ERRORS),
         "quality_avg": round(mean(QUALITY_SCORES), 4) if QUALITY_SCORES else 0.0,
     }
+
+
+def error_snapshot() -> list[dict]:
+    return [
+        {
+            "error_type": e["error_type"],
+            "correlation_id": e["correlation_id"],
+            "detail": e["detail"],
+            "user_id_hash": e["user_id_hash"],
+            "timestamp": e["timestamp"],
+        }
+        for e in ERROR_DETAILS
+    ]

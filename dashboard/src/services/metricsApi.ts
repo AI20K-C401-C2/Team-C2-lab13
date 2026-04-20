@@ -1,3 +1,7 @@
+import { loadMetrics, saveMetrics, loadErrorLogs, saveErrorLogs } from './metricsStorage';
+import { fetchErrors } from './errorsApi';
+import type { ErrorLogEntry } from './errorsApi';
+
 export interface RawMetrics {
   traffic: number;
   latency_p50: number;
@@ -33,12 +37,18 @@ export interface MetricsData {
     out: number[];
   };
   qualityScore: number[];
+  errorLogs: ErrorLogEntry[];
 }
 
 const API_URL = '/metrics';
 const MAX_POINTS = 240; // 1 hour at 15s intervals
+const MAX_ERROR_LOGS = 100;
 
-let history: MetricsData = {
+// Load from localStorage on init
+const stored = loadMetrics();
+const storedLogs = loadErrorLogs();
+
+let history: MetricsData = stored || {
   timestamps: [],
   latency: { p50: [], p95: [], p99: [] },
   traffic: [],
@@ -46,6 +56,7 @@ let history: MetricsData = {
   cost: [],
   tokens: { in: [], out: [] },
   qualityScore: [],
+  errorLogs: storedLogs || [],
 };
 
 function shiftArray<T>(arr: T[], val: T, max: number): T[] {
@@ -59,14 +70,25 @@ function calcErrorTotal(breakdown: Record<string, number>): number {
 }
 
 export async function fetchMetrics(): Promise<MetricsData> {
-  const res = await fetch(API_URL, { method: 'GET' });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const raw: RawMetrics = await res.json();
+  // Fetch both metrics and errors in parallel
+  const [metricsRes, errors] = await Promise.all([
+    fetch(API_URL, { method: 'GET' }),
+    fetchErrors().catch(() => [] as ErrorLogEntry[]),
+  ]);
+
+  if (!metricsRes.ok) throw new Error(`HTTP ${metricsRes.status}`);
+  const raw: RawMetrics = await metricsRes.json();
 
   const now = new Date();
   const timeLabel = now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
   const errTotal = calcErrorTotal(raw.error_breakdown || {});
+
+  // Merge new error logs from /errors endpoint
+  const mergedLogs = [...history.errorLogs, ...errors];
+  if (mergedLogs.length > MAX_ERROR_LOGS) {
+    mergedLogs.splice(0, mergedLogs.length - MAX_ERROR_LOGS);
+  }
 
   history = {
     timestamps: shiftArray(history.timestamps, timeLabel, MAX_POINTS),
@@ -90,7 +112,14 @@ export async function fetchMetrics(): Promise<MetricsData> {
       out: shiftArray(history.tokens.out, raw.tokens_out_total, MAX_POINTS),
     },
     qualityScore: shiftArray(history.qualityScore, raw.quality_avg, MAX_POINTS),
+    errorLogs: mergedLogs,
   };
+
+  // Save to localStorage after each fetch
+  saveMetrics(history);
+  saveErrorLogs(mergedLogs);
 
   return history;
 }
+
+export type { ErrorLogEntry };

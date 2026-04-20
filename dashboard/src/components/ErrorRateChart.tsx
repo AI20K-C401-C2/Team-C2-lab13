@@ -19,38 +19,64 @@ interface Props {
 const ERROR_THRESHOLD = 2;
 
 export default function ErrorRateChart({ data }: Props) {
+  // Check if breakdown has any non-zero values
+  const hasBreakdown = data.errorRate.breakdown['4xx'].some((v) => v > 0) ||
+    data.errorRate.breakdown['5xx'].some((v) => v > 0) ||
+    data.errorRate.breakdown.timeout.some((v) => v > 0);
+
   const chartData = {
     labels: data.timestamps,
-    datasets: [
-      {
-        label: '4xx Errors',
-        data: data.errorRate.breakdown['4xx'],
-        backgroundColor: 'rgba(245, 158, 11, 0.8)',
-        borderRadius: 2,
-      },
-      {
-        label: '5xx Errors',
-        data: data.errorRate.breakdown['5xx'],
-        backgroundColor: 'rgba(239, 68, 68, 0.8)',
-        borderRadius: 2,
-      },
-      {
-        label: 'Timeouts',
-        data: data.errorRate.breakdown.timeout,
-        backgroundColor: 'rgba(107, 114, 128, 0.8)',
-        borderRadius: 2,
-      },
-      {
-        label: 'SLO Threshold',
-        data: Array(data.timestamps.length).fill(ERROR_THRESHOLD),
-        type: 'line' as const,
-        borderColor: '#ef4444',
-        borderDash: [6, 4],
-        borderWidth: 2,
-        pointRadius: 0,
-        fill: false,
-      },
-    ],
+    datasets: hasBreakdown
+      ? [
+          {
+            label: '4xx Errors',
+            data: data.errorRate.breakdown['4xx'],
+            backgroundColor: 'rgba(245, 158, 11, 0.8)',
+            borderRadius: 2,
+          },
+          {
+            label: '5xx Errors',
+            data: data.errorRate.breakdown['5xx'],
+            backgroundColor: 'rgba(239, 68, 68, 0.8)',
+            borderRadius: 2,
+          },
+          {
+            label: 'Timeouts',
+            data: data.errorRate.breakdown.timeout,
+            backgroundColor: 'rgba(107, 114, 128, 0.8)',
+            borderRadius: 2,
+          },
+          {
+            label: 'SLO Threshold',
+            data: Array(data.timestamps.length).fill(ERROR_THRESHOLD),
+            type: 'line' as const,
+            borderColor: '#ef4444',
+            borderDash: [6, 4],
+            borderWidth: 2,
+            pointRadius: 0,
+            fill: false,
+          },
+        ]
+      : [
+          {
+            label: 'Error Rate Total',
+            data: data.errorRate.total,
+            backgroundColor: 'rgba(239, 68, 68, 0.7)',
+            borderColor: '#ef4444',
+            borderWidth: 1,
+            borderRadius: 4,
+          },
+          {
+            label: 'SLO Threshold',
+            data: Array(data.timestamps.length).fill(ERROR_THRESHOLD),
+            type: 'line' as const,
+            borderColor: '#ef4444',
+            borderDash: [6, 4],
+            borderWidth: 2,
+            pointRadius: 0,
+            fill: false,
+          },
+        ],
   };
 
   const options = {
@@ -58,7 +84,11 @@ export default function ErrorRateChart({ data }: Props) {
     maintainAspectRatio: false,
     plugins: {
       legend: { position: 'top' as const, labels: { boxWidth: 12, font: { size: 11 } } },
-      title: { display: true, text: 'Error Rate Breakdown', font: { size: 14, weight: 'bold' as const } },
+      title: {
+        display: true,
+        text: hasBreakdown ? 'Error Rate Breakdown' : 'Error Rate Total',
+        font: { size: 14, weight: 'bold' as const },
+      },
       tooltip: {
         callbacks: {
           label: (ctx: any) =>
@@ -69,9 +99,9 @@ export default function ErrorRateChart({ data }: Props) {
       },
     },
     scales: {
-      x: { stacked: true },
+      x: { stacked: hasBreakdown },
       y: {
-        stacked: true,
+        stacked: hasBreakdown,
         title: { display: true, text: '%' },
         beginAtZero: true,
       },
