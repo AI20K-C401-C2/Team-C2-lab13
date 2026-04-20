@@ -15,32 +15,32 @@
 ---
 
 ## 2. Group Performance (Auto-Verified)
-- [VALIDATE_LOGS_FINAL_SCORE]: /100
-- [TOTAL_TRACES_COUNT]: 
-- [PII_LEAKS_FOUND]: 
+- [VALIDATE_LOGS_FINAL_SCORE]: 100/100
+- [TOTAL_TRACES_COUNT]: 20
+- [PII_LEAKS_FOUND]: 0
 
 ---
 
 ## 3. Technical Evidence (Group)
 
 ### 3.1 Logging & Tracing
-- [EVIDENCE_CORRELATION_ID_SCREENSHOT]: [Path to image]
-- [EVIDENCE_PII_REDACTION_SCREENSHOT]: [Path to image]
-- [EVIDENCE_TRACE_WATERFALL_SCREENSHOT]: [Path to image]
-- [TRACE_WATERFALL_EXPLANATION]: (Briefly explain one interesting span in your trace)
+- [EVIDENCE_CORRELATION_ID_SCREENSHOT]: docs/evidence/correlation-id-log.png
+- [EVIDENCE_PII_REDACTION_SCREENSHOT]: docs/evidence/pii-redaction-log.png
+- [EVIDENCE_TRACE_WATERFALL_SCREENSHOT]: docs/evidence/langfuse-trace-waterfall.png
+- [TRACE_WATERFALL_EXPLANATION]: Trong trace waterfall, nhóm thấy một request `/chat` được gắn với `session_id`, `user_id` đã băm để không lộ thông tin thật, và có tag như `lab`, `qa` hoặc `summary`, `claude-sonnet-4-5`. Điểm thú vị là trace này cho thấy metadata như `doc_count` và `query_preview`, đồng thời có usage của token input và output. Điều này giúp nhóm hiểu rõ một câu hỏi đi qua hệ thống như thế nào, tốn bao nhiêu token, và dễ đối chiếu giữa trace với log khi cần debug.
 
 ### 3.2 Dashboard & SLOs
-- [DASHBOARD_6_PANELS_SCREENSHOT]: [Path to image]
+- [DASHBOARD_6_PANELS_SCREENSHOT]: docs/evidence/dashboard-6-panels.png
 - [SLO_TABLE]:
 | SLI | Target | Window | Current Value |
 |---|---:|---|---:|
-| Latency P95 | < 3000ms | 28d | |
-| Error Rate | < 2% | 28d | |
-| Cost Budget | < $2.5/day | 1d | |
+| Latency P95 | < 3000ms | 28d | 151ms |
+| Error Rate | < 2% | 28d | 0% |
+| Cost Budget | < $2.5/day | 1d | $0.0221 |
 
 ### 3.3 Alerts & Runbook
-- [ALERT_RULES_SCREENSHOT]: [Path to image]
-- [SAMPLE_RUNBOOK_LINK]: [docs/alerts.md#L...]
+- [ALERT_RULES_SCREENSHOT]: docs/evidence/alert-rules.png
+- [SAMPLE_RUNBOOK_LINK]: docs/alerts.md#L3
 
 ---
 

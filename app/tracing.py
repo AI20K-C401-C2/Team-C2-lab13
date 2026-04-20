@@ -1,7 +1,13 @@
 from __future__ import annotations
 
 import os
+from pathlib import Path
 from typing import Any
+
+from dotenv import load_dotenv
+
+# Load .env before importing Langfuse decorators so the SDK sees credentials at import time.
+load_dotenv(Path(__file__).resolve().parents[1] / ".env")
 
 try:
     from langfuse.decorators import observe, langfuse_context

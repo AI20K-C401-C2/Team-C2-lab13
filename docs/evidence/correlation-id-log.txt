@@ -1,0 +1,9 @@
+Sample log lines showing correlation ID propagation:
+
+{"service": "api", "payload": {"message_preview": "What is your refund policy? My email is [REDACTED_EMAIL]"}, "event": "request_received", "env": "dev", "session_id": "s01", "correlation_id": "req-65c27de5", "user_id_hash": "2055254ee30a", "model": "claude-sonnet-4-5", "feature": "qa", "level": "info", "ts": "2026-04-20T08:48:24.362015Z"}
+{"service": "api", "latency_ms": 150, "tokens_in": 37, "tokens_out": 142, "cost_usd": 0.002241, "payload": {"answer_preview": "Starter answer. Teams should improve this output logic and add better quality ch..."}, "event": "response_sent", "env": "dev", "session_id": "s01", "correlation_id": "req-65c27de5", "user_id_hash": "2055254ee30a", "model": "claude-sonnet-4-5", "feature": "qa", "level": "info", "ts": "2026-04-20T08:48:24.513723Z"}
+
+What to point out in the screenshot:
+- `correlation_id` xuat hien o ca request va response
+- `session_id` va `user_id_hash` da duoc bind vao log context
+- log van la JSON co cau truc de de tim kiem va phan tich
